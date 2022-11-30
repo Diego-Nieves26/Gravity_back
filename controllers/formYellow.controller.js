@@ -3,10 +3,9 @@ const { FormYellow } = require("../models/formYellow.model");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
-const { Email } = require("../utils/email.util");
 
 const createFormYellow = catchAsync(async (req, res, next) => {
-  const { name, phone, email, message } = req.body;
+  const { name, phone, email } = req.body;
   const formYellowExist = await FormYellow.findOne({ where: { email } });
 
   if (!formYellowExist) {
@@ -16,8 +15,6 @@ const createFormYellow = catchAsync(async (req, res, next) => {
       email,
     });
   }
-
-  await new Email().sendWelcome({ name, email, message });
 
   res.status(201).json({
     status: "success",
