@@ -17,6 +17,8 @@ class Email {
 			// Connect to SendGrid
 			return nodemailer.createTransport({
 				service: 'SendGrid',
+				host: 'smtp.sendgrid.net',
+				port: 465,
 				auth: {
 					user: 'apikey',
 					pass: process.env.SENDGRID_API_KEY,
@@ -36,7 +38,6 @@ class Email {
 
 	// Send the actual mail
 	async send(template, subject, mailData) {
-		console.log(mailData)
 		const html = pug.renderFile(
 			path.join(__dirname, '..', 'views', 'emails', `${template}.pug`),
 			mailData
@@ -45,14 +46,14 @@ class Email {
 		await this.newTransport().sendMail({
 			from: mailData.email,
 			to: process.env.MAIL_FROM,
-			subject,
-			html,
+			subject: subject,
+			html: html,
 			text: htmlToText(html),
 		});
 	}
 
 	async sendWelcome(name) {
-		await this.send('welcome', 'Welcome to our app', name);
+		await this.send('welcome', 'Bienvenido a Gravity', name);
 	}
 }
 

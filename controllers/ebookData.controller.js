@@ -6,19 +6,21 @@ const { catchAsync } = require("../utils/catchAsync.util");
 
 const createEbookData = catchAsync(async (req, res, next) => {
   const { name, email, advertising, socialNetworks, webPage, other } = req.body;
+  const ebookDataExist = await EbookData.findOne({ where: { email } });
 
-  const newEbookData = await EbookData.create({
-    name,
-    email,
-    advertising,
-    socialNetworks,
-    webPage,
-    other,
-  });
+  if (!ebookDataExist) {
+    await EbookData.create({
+      name,
+      email,
+      advertising,
+      socialNetworks,
+      webPage,
+      other,
+    });
+  }
 
   res.status(201).json({
     status: "success",
-    newEbookData,
   });
 });
 

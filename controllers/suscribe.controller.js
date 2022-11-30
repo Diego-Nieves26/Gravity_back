@@ -6,14 +6,16 @@ const { catchAsync } = require("../utils/catchAsync.util");
 
 const createSuscribe = catchAsync(async (req, res, next) => {
   const { email } = req.body;
+  const emailExist = await Suscribe.findOne({ where: { email } });
 
-  const newEmailSuscribe = await Suscribe.create({
-    email,
-  });
+  if (!emailExist) {
+    await Suscribe.create({
+      email,
+    });
+  }
 
   res.status(201).json({
     status: "success",
-    newEmailSuscribe,
   });
 });
 

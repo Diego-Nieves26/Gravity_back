@@ -7,20 +7,20 @@ const { Email } = require("../utils/email.util");
 
 const createFormYellow = catchAsync(async (req, res, next) => {
   const { name, phone, email, message } = req.body;
+  const formYellowExist = await FormYellow.findOne({ where: { email } });
 
-  const newFormYellow = await FormYellow.create({
-    name,
-    phone,
-    email,
-  });
+  if (!formYellowExist) {
+    await FormYellow.create({
+      name,
+      phone,
+      email,
+    });
+  }
 
-  console.log(message)
-
-  await new Email().sendWelcome({ name, email, order: ""  });
+  await new Email().sendWelcome({ name, email, message });
 
   res.status(201).json({
     status: "success",
-    newFormYellow,
   });
 });
 
