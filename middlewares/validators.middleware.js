@@ -41,8 +41,17 @@ const createFormYellowValidators = [
   checkResult,
 ];
 
+const createServiceFormValidators = [
+  body("name").notEmpty().withMessage("Name cannot be empty"),
+  body("telephone").notEmpty().withMessage("Telephone cannot be empty"),
+  body("email").isEmail().withMessage("Must provide a valid email"),
+  body("country").notEmpty().withMessage("Country cannot be empty"),
+  checkResult,
+];
+
 module.exports = {
   createSuscribeValidators,
   createEbookDataValidators,
   createFormYellowValidators,
+  createServiceFormValidators
 };

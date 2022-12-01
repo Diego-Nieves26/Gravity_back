@@ -10,6 +10,7 @@ const cors = require("cors")
 const { suscribeRoute } = require("./routes/suscribe.route");
 const { ebookDataRoute } = require("./routes/ebookData.route");
 const { formYellowRoute } = require("./routes/formYellow.route");
+const { serviceFormRoute } = require("./routes/serviceForm.route");
 
 // Global err controller
 const { globalErrorHandler } = require("./controllers/error.controller");
@@ -56,6 +57,7 @@ else app.use(morgan("combined"));
 app.use("/api/v1/suscribe", suscribeRoute);
 app.use("/api/v1/ebook-data", ebookDataRoute);
 app.use("/api/v1/form-yellow", formYellowRoute);
+app.use("/api/v1/form-services", serviceFormRoute);
 
 // Handle incoming unknown routes to the server
 app.all("*", (req, res, next) => {
