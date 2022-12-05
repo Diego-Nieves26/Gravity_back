@@ -12,10 +12,16 @@ const createSuscribe = catchAsync(async (req, res, next) => {
     await Suscribe.create({
       email,
     });
+
+    return res.status(201).json({
+      status: "success",
+      message: "El email fue guardado exitosamente."
+    });
   }
 
   res.status(201).json({
     status: "success",
+    message: "El email ya fue guardado anteriormente."
   });
 });
 
