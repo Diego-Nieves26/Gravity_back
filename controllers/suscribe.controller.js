@@ -15,16 +15,26 @@ const createSuscribe = catchAsync(async (req, res, next) => {
 
     return res.status(201).json({
       status: "success",
-      message: "El email fue guardado exitosamente."
+      message: "El email fue guardado exitosamente.",
     });
   }
 
   res.status(201).json({
     status: "success",
-    message: "El email ya fue guardado anteriormente."
+    message: "El email ya fue guardado anteriormente.",
+  });
+});
+
+const getAllSuscribe = catchAsync(async (req, res, next) => {
+  const emails = await Suscribe.findAll({ where: { status: "active" } });
+
+  res.status(201).json({
+    status: "success",
+    emails
   });
 });
 
 module.exports = {
   createSuscribe,
+  getAllSuscribe
 };

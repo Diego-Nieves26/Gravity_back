@@ -21,6 +21,16 @@ const createFormYellow = catchAsync(async (req, res, next) => {
   });
 });
 
+const getAllFormYellow = catchAsync(async (req, res, next) => {
+  const yellowData = await FormYellow.findAll({ where: { status: "active" } });
+
+  res.status(201).json({
+    status: "success",
+    yellowData
+  });
+});
+
 module.exports = {
   createFormYellow,
+  getAllFormYellow
 };

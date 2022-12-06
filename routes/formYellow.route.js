@@ -1,7 +1,10 @@
 const express = require("express");
 
 // Controllers
-const { createFormYellow } = require("../controllers/formYellow.controller");
+const {
+  createFormYellow,
+  getAllFormYellow,
+} = require("../controllers/formYellow.controller");
 
 // Middlewares
 const {
@@ -9,6 +12,8 @@ const {
 } = require("../middlewares/validators.middleware");
 
 const formYellowRoute = express.Router();
+
+formYellowRoute.get("/", getAllFormYellow);
 
 formYellowRoute.post("/", createFormYellowValidators, createFormYellow);
 

@@ -43,6 +43,7 @@ const createFormYellowValidators = [
 
 const createServiceFormValidators = [
   body("name").notEmpty().withMessage("Name cannot be empty"),
+  body("formName").notEmpty().withMessage("Form name cannot be empty"),
   body("telephone").notEmpty().withMessage("Telephone cannot be empty"),
   body("email").isEmail().withMessage("Must provide a valid email"),
   body("country").notEmpty().withMessage("Country cannot be empty"),

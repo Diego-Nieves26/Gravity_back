@@ -1,7 +1,10 @@
 const express = require("express");
 
 // Controllers
-const { createEbookData } = require("../controllers/ebookData.controller");
+const {
+  createEbookData,
+  getAllEbookData,
+} = require("../controllers/ebookData.controller");
 
 // Middlewares
 const {
@@ -9,6 +12,8 @@ const {
 } = require("../middlewares/validators.middleware");
 
 const ebookDataRoute = express.Router();
+
+ebookDataRoute.get("/", getAllEbookData);
 
 ebookDataRoute.post("/", createEbookDataValidators, createEbookData);
 

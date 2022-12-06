@@ -9,6 +9,10 @@ const ServiceForm = db.define(
       autoIncrement: true,
       allowNull: false,
     },
+    formName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,

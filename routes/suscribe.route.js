@@ -1,7 +1,7 @@
 const express = require("express");
 
 // Controllers
-const { createSuscribe } = require("../controllers/suscribe.controller");
+const { createSuscribe, getAllSuscribe } = require("../controllers/suscribe.controller");
 
 // Middlewares
 const {
@@ -9,6 +9,8 @@ const {
 } = require("../middlewares/validators.middleware");
 
 const suscribeRoute = express.Router();
+
+suscribeRoute.get("/", getAllSuscribe);
 
 suscribeRoute.post("/", createSuscribeValidators, createSuscribe);
 

@@ -24,6 +24,16 @@ const createEbookData = catchAsync(async (req, res, next) => {
   });
 });
 
+const getAllEbookData = catchAsync(async (req, res, next) => {
+  const offerData = await EbookData.findAll({ where: { status: "active" } });
+
+  res.status(201).json({
+    status: "success",
+    offerData,
+  });
+});
+
 module.exports = {
   createEbookData,
+  getAllEbookData,
 };

@@ -1,7 +1,7 @@
 const express = require("express");
 
 // Controllers
-const { createServiceForm } = require("../controllers/serviceForm.controller");
+const { createServiceForm, getAllServiceForm } = require("../controllers/serviceForm.controller");
 
 // Middlewares
 const {
@@ -9,6 +9,8 @@ const {
 } = require("../middlewares/validators.middleware");
 
 const serviceFormRoute = express.Router();
+
+serviceFormRoute.get("/", getAllServiceForm);
 
 serviceFormRoute.post("/", createServiceFormValidators, createServiceForm);
 
