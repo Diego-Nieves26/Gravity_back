@@ -6,7 +6,9 @@ const { catchAsync } = require("../utils/catchAsync.util");
 
 const createSuscribe = catchAsync(async (req, res, next) => {
   const { email } = req.body;
-  const emailExist = await Suscribe.findOne({ where: { email } });
+  const emailExist = await Suscribe.findOne({
+    where: { email, status: "active" },
+  });
 
   if (!emailExist) {
     await Suscribe.create({
@@ -30,11 +32,11 @@ const getAllSuscribe = catchAsync(async (req, res, next) => {
 
   res.status(201).json({
     status: "success",
-    emails
+    emails,
   });
 });
 
 module.exports = {
   createSuscribe,
-  getAllSuscribe
+  getAllSuscribe,
 };

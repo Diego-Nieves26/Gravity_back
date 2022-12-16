@@ -7,6 +7,7 @@ const path = require("path");
 const cors = require("cors")
 
 // Routers
+const { eventsRoute } = require("./routes/events.route");
 const { suscribeRoute } = require("./routes/suscribe.route");
 const { ebookDataRoute } = require("./routes/ebookData.route");
 const { formYellowRoute } = require("./routes/formYellow.route");
@@ -54,6 +55,7 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 else app.use(morgan("combined"));
 
 // Define endpoints
+app.use("/api/v1/events", eventsRoute);
 app.use("/api/v1/suscribe", suscribeRoute);
 app.use("/api/v1/ebook-data", ebookDataRoute);
 app.use("/api/v1/form-yellow", formYellowRoute);

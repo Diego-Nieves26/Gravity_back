@@ -6,7 +6,9 @@ const { catchAsync } = require("../utils/catchAsync.util");
 
 const createServiceForm = catchAsync(async (req, res, next) => {
   const { formName, name, country, telephone, business, email } = req.body;
-  const serviceFormExist = await ServiceForm.findOne({ where: { email } });
+  const serviceFormExist = await ServiceForm.findOne({
+    where: { email, status: "active" },
+  });
 
   if (!serviceFormExist) {
     await ServiceForm.create({
@@ -25,16 +27,17 @@ const createServiceForm = catchAsync(async (req, res, next) => {
 });
 
 const getAllServiceForm = catchAsync(async (req, res, next) => {
-  const serviceForms = await ServiceForm.findAll({ where: { status: "active" } });
+  const serviceForms = await ServiceForm.findAll({
+    where: { status: "active" },
+  });
 
   res.status(201).json({
     status: "success",
-    serviceForms
+    serviceForms,
   });
 });
 
-
 module.exports = {
   createServiceForm,
-  getAllServiceForm
+  getAllServiceForm,
 };

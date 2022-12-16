@@ -50,9 +50,20 @@ const createServiceFormValidators = [
   checkResult,
 ];
 
+const createEventValidators = [
+  body("name").notEmpty().withMessage("Name cannot be empty"),
+  body("phone").notEmpty().withMessage("Phone cannot be empty"),
+  body("email").isEmail().withMessage("Must provide a valid email"),
+  body("budget").notEmpty().withMessage("Budget cannot be empty"),
+  body("date").notEmpty().withMessage("Date cannot be empty"),
+  body("time").notEmpty().withMessage("Time cannot be empty"),
+  checkResult,
+];
+
 module.exports = {
+  createEventValidators,
   createSuscribeValidators,
   createEbookDataValidators,
   createFormYellowValidators,
-  createServiceFormValidators
+  createServiceFormValidators,
 };

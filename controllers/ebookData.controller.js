@@ -6,7 +6,9 @@ const { catchAsync } = require("../utils/catchAsync.util");
 
 const createEbookData = catchAsync(async (req, res, next) => {
   const { name, email, advertising, socialNetworks, webPage, other } = req.body;
-  const ebookDataExist = await EbookData.findOne({ where: { email } });
+  const ebookDataExist = await EbookData.findOne({
+    where: { email, status: "active" },
+  });
 
   if (!ebookDataExist) {
     await EbookData.create({
